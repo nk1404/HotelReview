@@ -43,13 +43,13 @@ const ReviewPage = ({ classes }) => {
   const history = useHistory();
   const [formContext, setFormContext] = useContext(FormContext);
   const hotelDetails = formContext?.reviewResults;
-  let reviews = [];
-  if (hotelDetails) {
-    reviews = hotelDetails[0].reviews;
-    reviews.map((data) => {
+  const reviews = hotelDetails[0]?.reviews;
+  reviews.map((data) => {
       data.FormattedDate = Moment(data.publishedDate).format("MMMM Do, YYYY");
     });
-  }
+  const navigateBack = () => {
+    history.goBack();
+  } 
   const columns = [
     {
       dataField: "FormattedDate",
@@ -95,8 +95,13 @@ const ReviewPage = ({ classes }) => {
       <div>
         <img className={classes.homeBanner} src={homeBanner} alt="homeBanner" />
       </div>
-      {reviews.length !== 0 && (
+      
         <div className={classes.branding}>
+          <div>
+            <button type="button" className="btn btn-primary mt-4" onClick={navigateBack}>Go Back</button>
+          </div>
+          {reviews.length !== 0 && (
+          <div>
           <div className={classes.hotelDetails}>
             <h2 className={classes.paddingTop2}>
               Hotel: {hotelDetails[0].name}
@@ -116,13 +121,12 @@ const ReviewPage = ({ classes }) => {
               defaultSorted={defaultSorted}
             />
           </div>
-        </div>
+          </div>
       )}
       {reviews.length == 0 && (
-        <div className={classes.branding}>
           <h3 className={classes.paddingTop2}>No reviews found</h3>
-        </div>
       )}
+      </div>
     </div>
   );
 };

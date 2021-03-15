@@ -62,7 +62,7 @@ const HomePage = ({classes}) => {
                         <h3 className={classes.paddingTop2}>{HomePageLabels.HOTEL_SELECTION}</h3>
                         <Field name="hotelName" className={classes.marginTop2} component="select" >
                             <option></option>
-                            {hotelOptions instanceof Array && hotelOptions.map((options) => (
+                            {hotelOptions.map((options) => (
                                <option key={options.value} value={options.value}>{options.label}</option>
                             ))}
                         </Field>

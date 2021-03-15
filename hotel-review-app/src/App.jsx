@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BrowserRouter, Redirect, Route, Switch, useHistory} from "react-router-dom";
+import {Redirect, Route, Switch, useHistory} from "react-router-dom";
 import HomePage from "./components/HomePage";
 import ReviewPage from "./components/ReviewPage"
 import logo from './logo.svg';
@@ -14,16 +14,14 @@ function App() {
   const RouterRender = () => {
     return (
       <FormContext.Provider value={[formContext, setFormContext]}>
-      <BrowserRouter>
       <Switch>
         <Route exact path={`/`}>
           <HomePage/>
         </Route>
-        <Route exact path={`/hotel-reviews`}>
+        <Route path="/hotel-reviews">
           <ReviewPage/>
         </Route>
       </Switch>
-      </BrowserRouter>
       </FormContext.Provider>
     )
   }
